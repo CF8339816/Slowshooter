@@ -134,6 +134,7 @@ namespace Slowshooter
             Console.Write($"PLAYER {turn % 2 + 1}'S TURN!");
 
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\nUSE WASD or IJKL to move");
 
         }
     }
