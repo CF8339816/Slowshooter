@@ -7,11 +7,11 @@ namespace Slowshooter
     {
 
         static string playField = 
-@"+---+   +---+
-|   |   |   |
-|   |   |   |
-|   |   |   |
-+---+   +---+";
+@"+-----+   +-----+
+|     |   |     |
+|     |   |     |
+|     |   |     |
++-----+   +-----+";
 
         static bool isPlaying = true;
 
@@ -27,13 +27,13 @@ namespace Slowshooter
         static int p1_y_pos = 2;
 
         // player 2 pos
-        static int p2_x_pos = 10;
+        static int p2_x_pos = 11;
         static int p2_y_pos = 2;
 
         // bounds for player movement
-        static (int, int) p1_min_max_x = (1, 3);
+        static (int, int) p1_min_max_x = (1, 5);
         static (int, int) p1_min_max_y = (1, 3);
-        static (int, int) p2_min_max_x = (9, 11);
+        static (int, int) p2_min_max_x = (11, 15);
         static (int, int) p2_min_max_y = (1, 3);
 
         // what turn is it? will be 0 after game is drawn the first time
@@ -114,6 +114,7 @@ namespace Slowshooter
 
         static void Draw()
         {
+
             // draw the background (playfield)
             Console.SetCursorPosition(0, 0);
             Console.Write(playField);
@@ -129,26 +130,24 @@ namespace Slowshooter
             Console.Write("O");
 
             // draw the Turn Indicator
-            Console.SetCursorPosition(3, 5);
+            Console.SetCursorPosition(0, 5);
             Console.ForegroundColor = playerColors[turn % 2];
 
-            Console.Write($"PLAYER {turn % 2 + 1}'S TURN!");
+            Console.Write($"PLAYER {turn % 2 + 1}'S TURN!\n");
 
-            if ((turn % 2 == 0))
+
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+
+            if (turn % 2 == 0)
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("\nUSE 'WASD' to move");
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\nUSE WASD");
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("\n USE 'IJKL' to move"); 
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\nUSE IJKL");
             }
-            //    Console.ForegroundColor = ConsoleColor.DarkGray;
-            //Console.WriteLine("\nPlayer 1 USE 'WASD', Player2 USE 'IJKL' to move");
-            //Console.ForegroundColor = ConsoleColor.White;
+            
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
