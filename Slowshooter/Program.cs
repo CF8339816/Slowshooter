@@ -23,11 +23,11 @@ namespace Slowshooter
         static int p2_y_input;
 
         // player 1 pos
-        static int p1_x_pos = 2;
+        static int p1_x_pos = 3;
         static int p1_y_pos = 2;
 
         // player 2 pos
-        static int p2_x_pos = 11;
+        static int p2_x_pos = 13;
         static int p2_y_pos = 2;
 
         // bounds for player movement
