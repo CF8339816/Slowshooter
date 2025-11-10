@@ -134,10 +134,21 @@ namespace Slowshooter
 
             Console.Write($"PLAYER {turn % 2 + 1}'S TURN!");
 
-
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("\nUSE WASD or IJKL to move");
-            Console.ForegroundColor = ConsoleColor.White;
+            if ((turn % 2 == 0))
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("\nUSE 'WASD' to move");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("\n USE 'IJKL' to move"); 
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            //    Console.ForegroundColor = ConsoleColor.DarkGray;
+            //Console.WriteLine("\nPlayer 1 USE 'WASD', Player2 USE 'IJKL' to move");
+            //Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
