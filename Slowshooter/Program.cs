@@ -45,7 +45,6 @@ namespace Slowshooter
         static (int, int) player1_position;
         static (int, int) player2_position;
 
-        // player input 
         static int p1_x_input;
         static int p1_y_input;
 
@@ -116,7 +115,7 @@ namespace Slowshooter
                 input = Console.ReadKey(true).Key;
             }
 
-            // check all input keys 
+            // check all input keys
             if (input == ConsoleKey.A) p1_x_input = -1;
             if (input == ConsoleKey.D) p1_x_input = 1;
             if (input == ConsoleKey.W) p1_y_input = -1;
@@ -181,7 +180,6 @@ namespace Slowshooter
             Console.Write("O");
 
             //draw pickups
-
             if(generatePickup1)
             {
                 generatePickup1 = false;
