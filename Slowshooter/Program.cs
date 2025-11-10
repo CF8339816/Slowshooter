@@ -6,7 +6,7 @@ namespace Slowshooter
     internal class Program
     {
 
-        static string playField = 
+        static string playField =
 @"+-----+   +-----+
 |     |   |     |
 |     |   |     |
@@ -14,6 +14,36 @@ namespace Slowshooter
 +-----+   +-----+";
 
         static bool isPlaying = true;
+
+        #region Player 1 Pickup Random
+
+        //player 1 pickup X and Y random
+        static Random Player1PickUpsXRnD = new Random();
+        static Random Player1PickUpsYRnD = new Random();
+
+        // player 1 pickup positions
+        static int pickup1_x_pos;
+        static int pickup1_y_pos;
+
+        #endregion
+
+        #region Player 2 Pickup
+
+        //player 2 pickup X and Y random
+        static Random Player2PickUpsXRnD = new Random();
+        static Random Player2PickUpsYRnD = new Random();
+
+        // player 2 pickup positions
+        static int pickup2_x_pos;
+        static int pickup2_y_pos;
+
+        #endregion
+
+        static (int, int) pickup1_position;
+        static (int, int) pickup2_position;
+
+        static (int, int) player1_position;
+        static (int, int) player2_position;
 
         // player input 
         static int p1_x_input;
@@ -36,23 +66,29 @@ namespace Slowshooter
         static (int, int) p2_min_max_x = (11, 15);
         static (int, int) p2_min_max_y = (1, 3);
 
+        static int player1_score = 0;
+        static int player2_score = 0;
+
+        static bool generatePickup1 = true;
+        static bool generatePickup2 = true;
+
         // what turn is it? will be 0 after game is drawn the first time
         static int turn = -1;
 
         // contains the keys that player 1 and player 2 are allowed to press
-        static (char[], char[]) allKeybindings = (new char[]{ 'W', 'A', 'S', 'D' }, new char[]{ 'J', 'I', 'L', 'K' });
+        static (char[], char[]) allKeybindings = (new char[] { 'W', 'A', 'S', 'D' }, new char[] { 'J', 'I', 'L', 'K' });
         static ConsoleColor[] playerColors = { ConsoleColor.Red, ConsoleColor.Blue };
 
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
 
-            while(isPlaying)
+            while (isPlaying)
             {
                 ProcessInput();
                 Update();
                 Draw();
-                
+
             }
         }
 
@@ -85,7 +121,7 @@ namespace Slowshooter
             if (input == ConsoleKey.D) p1_x_input = 1;
             if (input == ConsoleKey.W) p1_y_input = -1;
             if (input == ConsoleKey.S) p1_y_input = 1;
-          
+
             if (input == ConsoleKey.J) p2_x_input = -1;
             if (input == ConsoleKey.L) p2_x_input = 1;
             if (input == ConsoleKey.I) p2_y_input = -1;
@@ -108,6 +144,21 @@ namespace Slowshooter
             p2_y_pos += p2_y_input;
             p2_y_pos = p2_y_pos.Clamp(p2_min_max_y.Item1, p2_min_max_y.Item2);
 
+            player1_position = (p1_y_pos, p1_x_pos);
+            player2_position = (p2_y_pos, p2_x_pos);
+
+            if(player1_position == pickup1_position)
+            {
+                player1_score++;
+                generatePickup1 = true;
+            }
+
+            /*if (player2_position == pickup2_position)
+            {
+                player2_score++;
+                generatePickup2 = true;
+            }*/
+
             turn += 1;
 
         }
@@ -129,6 +180,32 @@ namespace Slowshooter
             Console.ForegroundColor = playerColors[1];
             Console.Write("O");
 
+            //draw pickups
+
+            if(generatePickup1)
+            {
+                generatePickup1 = false;
+                pickup1_x_pos = Player1PickUpsXRnD.Next(1, 6);
+                pickup1_y_pos = Player1PickUpsYRnD.Next(1, 4);
+                pickup1_position = (pickup1_x_pos, pickup1_y_pos);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(pickup1_position.Item1, pickup1_position.Item2);
+            Console.WriteLine("*");
+
+            if (generatePickup2)
+            {
+                generatePickup2 = false;
+                pickup2_x_pos = Player1PickUpsXRnD.Next(11, 16);
+                pickup2_y_pos = Player1PickUpsYRnD.Next(1, 4);
+                pickup2_position = (pickup2_x_pos, pickup2_y_pos);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.SetCursorPosition(pickup2_position.Item1, pickup2_position.Item2);
+            Console.WriteLine("*");
+
             // draw the Turn Indicator
             Console.SetCursorPosition(0, 5);
             Console.ForegroundColor = playerColors[turn % 2];
@@ -146,8 +223,11 @@ namespace Slowshooter
             {
                 Console.WriteLine("\nUSE IJKL");
             }
-            
+
             Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine(player1_score);
+            Console.WriteLine(pickup1_position);
         }
     }
 }
