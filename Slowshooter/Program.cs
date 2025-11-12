@@ -189,10 +189,12 @@ namespace Slowshooter
                 pickup1_y_pos = Player1PickUpsYRnD.Next(1, 4);
                 pickup1_position = (pickup1_x_pos, pickup1_y_pos);
             }
-
-            Console.ForegroundColor = ConsoleColor.Red;
+           
+            Console.ForegroundColor = playerColors[0]; //uses predefined player1 color
+            //Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(pickup1_position.Item1, pickup1_position.Item2);
-            Console.WriteLine("*");
+            Console.Write("*"); // player write function uses write not writeline, trying it to see if it makes a difference with the pickup issues ww were having
+            //Console.WriteLine("*");
 
             if (generatePickup2)
             {
@@ -202,9 +204,12 @@ namespace Slowshooter
                 pickup2_position = (pickup2_x_pos, pickup2_y_pos);
             }
 
-            Console.ForegroundColor = ConsoleColor.Blue;
+
+            Console.ForegroundColor = playerColors[1]; //uses predefined player2 color
+            //Console.ForegroundColor = ConsoleColor.Blue;
             Console.SetCursorPosition(pickup2_position.Item1, pickup2_position.Item2);
-            Console.WriteLine("*");
+            Console.Write("*"); // player write function uses write not writeline, trying it to see if it makes a difference with the pickup issues ww were having
+           //Console.WriteLine("*");
 
             // draw the Turn Indicator
             Console.SetCursorPosition(0, 5);
@@ -214,37 +219,47 @@ namespace Slowshooter
 
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write(" To move please use:");
 
             if (turn % 2 == 0)
             {
-                Console.WriteLine("\nUSE WASD");
+                Console.ForegroundColor = playerColors[0];
+                Console.WriteLine("\n WASD");
             }
             else
             {
-                Console.WriteLine("\nUSE IJKL");
+                Console.ForegroundColor = playerColors[1];
+                Console.WriteLine("\n IJKL");
             }
 
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.Write("Player 1 Score:");
+            Console.ForegroundColor = playerColors[0];
             Console.WriteLine(player1_score);
-            Console.Write("Player 2 Pickup:");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Player 1 Pickup:");
+            Console.ForegroundColor = playerColors[0];
             Console.WriteLine(pickup1_position);
-
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Player 2 Score:");
+            Console.ForegroundColor = playerColors[1];
             Console.WriteLine(player2_score);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Player 2 Pickup:");
+            Console.ForegroundColor = playerColors[1];
             Console.WriteLine(pickup2_position);
+            Console.ForegroundColor = ConsoleColor.White;
+           
+            //if (player1_score == 5)
+            //{
+            //    Console.WriteLine($" Player 1 has reached 5 points. Player 1 wins.");
+            //}
 
-            if (player1_score == 5)
-            {
-                Console.WriteLine($" Player 1 has reached 5 points. Player 1 wins.");
-            }
-
-            if (player2_score == 5)
-            {
-                Console.WriteLine($" Player 2 has reached 5 points. Player 1 wins.");
-            }
+            //if (player2_score == 5)
+            //{
+            //    Console.WriteLine($" Player 2 has reached 5 points. Player 1 wins.");
+            //}
 
         }
     }
