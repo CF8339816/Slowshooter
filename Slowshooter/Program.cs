@@ -152,13 +152,15 @@ namespace Slowshooter
                 generatePickup1 = true;
             }
 
-            /*if (player2_position == pickup2_position)
+            if (player2_position == pickup2_position)
             {
                 player2_score++;
                 generatePickup2 = true;
-            }*/
-
+            }
+            
+            
             turn += 1;
+
 
         }
 
@@ -224,8 +226,26 @@ namespace Slowshooter
 
             Console.ForegroundColor = ConsoleColor.White;
 
+            Console.Write("Player 1 Score:");
             Console.WriteLine(player1_score);
+            Console.Write("Player 2 Pickup:");
             Console.WriteLine(pickup1_position);
+
+            Console.Write("Player 2 Score:");
+            Console.WriteLine(player2_score);
+            Console.Write("Player 2 Pickup:");
+            Console.WriteLine(pickup2_position);
+
+            if (player1_score == 5)
+            {
+                Console.WriteLine($" Player 1 has reached 5 points. Player 1 wins.");
+            }
+
+            if (player2_score == 5)
+            {
+                Console.WriteLine($" Player 2 has reached 5 points. Player 1 wins.");
+            }
+
         }
     }
 }
