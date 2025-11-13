@@ -20,7 +20,7 @@ namespace Slowshooter
 +-----+   +-----+";
 
         static bool isPlaying = true;
-//Defining Player 1 pickup random A.B.
+        //Defining Player 1 pickup random A.B.
         #region Player 1 Pickup Random   
 
         //player 1 pickup X and Y random
@@ -98,8 +98,10 @@ namespace Slowshooter
                 ProcessInput();
                 Update();
                 Draw();
-
             }
+
+            Console.WriteLine("Press Any Key To Quit...");
+            Console.ReadKey(true);
         }
 
         static void ProcessInput()
@@ -144,7 +146,7 @@ namespace Slowshooter
             // update players' positions based on input
             p1_x_pos += p1_x_input;
             p1_x_pos = p1_x_pos.Clamp(p1_min_max_x.Item1, p1_min_max_x.Item2);
-                    
+
             p1_y_pos += p1_y_input;
             p1_y_pos = p1_y_pos.Clamp(p1_min_max_y.Item1, p1_min_max_y.Item2);
 
@@ -162,8 +164,8 @@ namespace Slowshooter
             player2_positionPROXY = (p2_x_pos, p2_y_pos);
 
             if (player1_positionPROXY == pickup1_position) //Redefining the pickup conditions for points  C.F.
-            //if (player1_position == pickup1_position)
-                {
+                                                           //if (player1_position == pickup1_position)
+            {
                 player1_score++;
                 generatePickup1 = true;
             }
@@ -174,8 +176,8 @@ namespace Slowshooter
                 player2_score++;
                 generatePickup2 = true;
             }
-            
-            
+
+
             turn += 1;
 
 
@@ -199,15 +201,15 @@ namespace Slowshooter
             Console.Write("O");
 
             //draw pickups  A.B.
-            if(generatePickup1)
+            if (generatePickup1)
             {
-               
+
                 generatePickup1 = false;
                 pickup1_x_pos = Player1PickUpsXRnD.Next(1, 6);
                 pickup1_y_pos = Player1PickUpsYRnD.Next(1, 4);
                 pickup1_position = (pickup1_x_pos, pickup1_y_pos);
             }
-           
+
             Console.ForegroundColor = playerColors[0]; //uses predefined player1 color C.F.
             //Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(pickup1_position.Item1, pickup1_position.Item2);
@@ -264,8 +266,8 @@ namespace Slowshooter
             Console.Write("Player 1 Pickup:");
             Console.ForegroundColor = playerColors[0];
             Console.WriteLine(pickup1_position);
-            
-            
+
+
             //Found out after adding player position for debugging that the positions display   y, x for  pickup and  x,y for player so not getting the correct location C.F. 
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Player 1 position:");
@@ -313,14 +315,16 @@ namespace Slowshooter
 
             if (player1_score == 5)
             {
-                Console.WriteLine($" Player 1 has reached 5 points. Player 1 wins.");
-               
+                Console.WriteLine($"Player 1 has reached 5 points. Player 1 wins.");
+                isPlaying = false;
+
             }
 
             if (player2_score == 5)
             {
-                Console.WriteLine($" Player 2 has reached 5 points. Player 2 wins.");
-               
+                Console.WriteLine($"Player 2 has reached 5 points. Player 2 wins.");
+                isPlaying = false;
+
             }
             Console.ForegroundColor = ConsoleColor.White;
 
